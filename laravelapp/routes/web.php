@@ -11,8 +11,15 @@
 |
 */
 
+//授業用
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello/{id?}/{pass?}','HelloController@index');
+Route::get('hello','HelloController@index');
+
+
+
+//実習問題
+//２－１
+Route::get('Jissyu2', 'JissyuController@index');
