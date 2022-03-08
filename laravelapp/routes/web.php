@@ -17,9 +17,17 @@ Route::get('/', function () {
 });
 
 Route::get('hello','HelloController@index');
+Route::post('hello','HelloController@post');
 
 
 
 //実習問題
 //２－１
 Route::get('Jissyu2', 'JissyuController@index');
+//３－１
+Route::get('jissyu3_1', 'Jissyu3_1Controller@index');
+Route::post('jissyu3_1', 'Jissyu3_1Controller@post');
+
+//3-2
+Route::get('jissyu3_2', 'Jissyu3_2Controller@index');
+Route::post('Jissyu3_2', 'Jissyu3_2Controller@post');

@@ -9,6 +9,6 @@
      <body>
         <h1>Index</h1>
         <p><?php echo $msg; ?></p>
-        <p><?php echo data("Y年n月j日");?></p>
+        <p><?php echo 'ID='.$id;?></p>
      </body>
 </html>
