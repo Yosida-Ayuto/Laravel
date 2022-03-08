@@ -1,19 +1,18 @@
-<html>
-    <head>
-    <title>Bland/Index</title>
-         <style>
-            body {font-size:16pt; color:#999;}
-            h1 {font-size:120pt; text-align:right; color:#f6f6f6; 
-                margin: -15px 0px 0px 0px; letter-spacing:-4pt;}
-         </style>
-     </head>
-     <body>
-        <h1>Blade/Index</h1>
-            <p>&#064;foreachデレクティブのテスト</p>
-        <ol>
-            @foreach($data as $item)
-            <li>{{$item}}</li>
-            @endforeach
-        </ol>
-     </body>
-</html>
+@extends('layouts.helloapp')
+
+@section('title','Index')
+
+@section('menuber')
+    @parent
+    インデックスページ
+    @endsection
+
+    @section('content')
+    <p>ここが本文のコンテンツです</p>
+    <p>Controller value<br>'message'={{$message}}</p>
+    <p>ViewComposer value<br>'view_message' = {{$view_message}}</p>
+    @endsection
+
+    @section('footer')
+        copyringht 2020 tuyano.
+    @endsectio

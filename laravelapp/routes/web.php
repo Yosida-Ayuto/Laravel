@@ -22,12 +22,13 @@ Route::post('hello','HelloController@post');
 
 
 //実習問題
-//２－１
+//2-1
 Route::get('Jissyu2', 'JissyuController@index');
-//３－１
-Route::get('jissyu3_1', 'Jissyu3_1Controller@index');
-Route::post('jissyu3_1', 'Jissyu3_1Controller@post');
+
+//3-1
+Route::get('jissyu3', 'Jissyu3_1Controller@index');
+Route::post('jissyu3', 'Jissyu3_1Controller@post');
 
 //3-2
-Route::get('jissyu3_2', 'Jissyu3_2Controller@index');
-Route::post('Jissyu3_2', 'Jissyu3_2Controller@post');
+Route::get('jissyu4', 'Jissyu3_2Controller@index');
+Route::post('Jissyu4', 'Jissyu3_2Controller@post');
