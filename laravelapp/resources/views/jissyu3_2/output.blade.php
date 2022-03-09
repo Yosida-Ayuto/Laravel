@@ -10,15 +10,15 @@
 <body>
     <h1>Blade/Index</h1>
     <ol>
-    @forelse($data as $item)
-    @empty()
+    @foreach($data as $item)
+    @if($loop->first)
     <p>データ一覧</p>
-    @___(18)___
+    @endif
     <li>No,{{$loop->iteration}}.{{$item}}</li>
-    @___(19)___(___(20)___)
+    @if($loop->last)
     <p>ここまで出力</p>
-    @
-    @___(22)___
+    @endif
+    @endforeach
  </body>
 </html>
 

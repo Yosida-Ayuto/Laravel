@@ -9,7 +9,7 @@ class Jissyu3_2Controller extends Controller
     public function index()
     {
         $data = [
-            'msg'=>'データ一覧',
+            'msg'=>'必要事項を記入してください',
         ];
         return view('jissyu3_2.input', $data);
     }
@@ -19,9 +19,9 @@ class Jissyu3_2Controller extends Controller
         $data = [
             'name'=>$request->name,
             'mail'=>$request->mail,
-            'age'=>$request->age
+            'age'=>$request->age,
         ];
-        return view('jissyu3_2.output',$data );
+        return view('jissyu3_2.output',['data'=>$data]);
     }
 
 }
