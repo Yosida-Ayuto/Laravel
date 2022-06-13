@@ -1,0 +1,26 @@
+@startuml Jissyu2_1
+actor ユーザー as user
+boundary ブラウザ as B
+control  web.php as web
+control kouka1_2Controller as ctrl
+boundary input.blade.php as input
+control kouka1_2Request.php as Re
+
+boundary output.blade.php as out
+
+user -> B : 該当ページをリクエスト[/kouka1_2]
+B -> web:GET[/kouka1_2]
+ctrl -> input 
+user -> input :送信ボタンを押下
+input -> web :POST
+web -> ctrl :@post
+ctrl -> Re:フォームリクエスト
+Re --> ctrl :　
+
+    alt キャッチ成功
+    B->A: 投げ返す
+    else キャッチ失敗
+    B->A: 謝る
+
+
+@enduml

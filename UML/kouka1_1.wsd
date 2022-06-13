@@ -1,0 +1,23 @@
+@startuml kouka1_1
+actor ユーザー as user
+boundary ブラウザ as B
+control  web.php as web
+control kouka1_1Controller as ctrl
+boundary kouka1_1.index.blade.php as index
+boundary layouts.kouka1_1.blade.php as lay
+boundary component.menu.blade.php as menu
+boundary component.subview.blade.php as suv
+
+user -> B : 該当ページをリクエスト[/kouka1_1]
+B -> web : GET[/kouka1_1]
+web -> ctrl : @index
+ctrl -> index : 
+index -> lay:@extends
+lay --> index
+index -> menu:@component
+menu--> index
+index-> suv:include 
+suv --> index
+
+
+@enduml

@@ -5,16 +5,101 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
+use Illuminate\Support\Facades\DB;
+use \App\person;
+use Illuminate\Support\Facades\Auth;
+
 
 class HelloController extends Controller
 {
         public function index(Request $request){
-      
-         return view('hello.index',['msg'=>'フォーム入力:']);      
-        }
 
-        public function post(HelloRequest $request){
-                
-                return view('hello.index', ['msg'=>'正しく入力されました！']);
-        }
+                $user = Auth::user();
+                $sort = $request->sort;
+                // $ietms = DB::table('people') -> orderBy($sort,'asc')->simplePaginate(5);
+                $items = person::orderBy($sort,'asc') -> simplePaginate(5);
+                $param = ['items' => $items, 'sort' => $sort, 'user' => $user];
+                return view('hello.index', $param);
+                }
+
+                public function show(Request $request){
+
+                        $min = $request->min;
+                        $max = DB::table('people')
+                        ->whereRaw('age >= ? and age <= ? ',
+                        [$min, $max])-> get();
+
+                        return view('hello.show',['items'=>$items]);
+                        }
+
+                        public function add(Request $request){
+                                return view('hello.add');
+                        }
+
+                        public function create(Request $request){
+                                $param=[
+                                        'name'=>$request->name,
+                                        'mail'=>$request->mail,
+                                        'age'=> $request->age,
+                                
+                                ];
+                                DB::table('people')->insert($param);
+                                return redirect('/hello');
+
+                        }
+
+                        
+                        public function edit(Request $request){
+                                $item= DB::table('people')
+                                ->where('id',$request->id)->first();
+                                return view('hello.edit',['form'=> $item]);
+                        }
+                        
+                        public function update(Request $request){
+                                $param=[
+                                        'name'=>$request->name,
+                                        'mail'=>$request->mail,
+                                        'age'=> $request->age,
+                                
+                                ];
+                                DB::table('people')
+                                ->where('id',$request->id)
+                                ->update($param);
+                                return redirect('/hello');
+
+                        }
+
+                        
+                        public function del(Request $request){
+                                $item = DB::table('people')
+                                ->where('id',$request->id)->first();
+                                return view('hello.del',['form'=>$item]);
+
+                        }
+
+                        
+                        public function remove(Request $request){
+                               
+                                DB::table('people')->where('id',$request->id)->delete();
+                                return redirect('/hello');
+
+                        }
+
+                        public function rest(Request $request){
+                                return redirect('hello.rest');
+                        }
+
+                        public function ses_get(Request $request)
+                        {
+                                $sesdata = $request->session()->get('msg');
+                                return view('hello.session',['session_data'=>$sesdata]);
+                        }
+
+                        
+                        public function ses_put(Request $request)
+                        {
+                               $msg = $request->input;
+                               $request->session()->put('msg',$msg);
+                               return redirect('hello/session');
+                        }
 }
