@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $this->call(RestdataTableSeeder::class);
+        $this->call(BookTableSeeder::class);
+        //無かった場合は追記すること。
+        
+ 
     }
 }

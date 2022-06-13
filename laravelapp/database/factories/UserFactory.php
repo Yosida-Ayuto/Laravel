@@ -26,3 +26,22 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(App\Preson::class,
+ function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'mail' => $faker->safeEmail,
+        'age' => random_int(1,99),
+    ];
+});
+
+$factory->define(App\Book::class,
+ function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'barcode' => $faker->barcode,
+        'number' => $faker->random_int(100000,10000000),
+        'price' => random_int(1,99),
+    ];
+});

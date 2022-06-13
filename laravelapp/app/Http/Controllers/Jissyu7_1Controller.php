@@ -8,10 +8,17 @@ use Validator;
 
 class Jissyu7_1Controller extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Person::all();
-        $param = ['input' => '','items' => $items];
+        //$items = Person::all();
+        //$param = ['input' => '','items' => $items];
+        if ($request->has('sort')){
+            $sort = 'name';
+        }else{
+            $sort = 'id';
+        }
+        $items = $request ->all();
+        $param = ['input' => '','items' => $items,$sort];
         return view('jissyu7_1.index', $param);
     }
 
@@ -23,8 +30,8 @@ class Jissyu7_1Controller extends Controller
         $messages = [
             'input.required' => '文字を入力してください。',
         ];
-        $validator = Validator::make(___(7)___,___(8)___,___(9)___);
-  if($validator->fails()){
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if($validator->fails()){
             return redirect('/jissyu7_1')
             ->withErrors($validator)
             ->withInput();
@@ -40,27 +47,27 @@ class Jissyu7_1Controller extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, Person::rules);
+        $this->validate($request, Person::$rules);
         $person = new Person;
- $form = $request->all();
+        $form = $request->all();
         unset($form['_token']);
         $person->fill($form)->save();
         return redirect('/jissyu7_1');
     }
 
-    public function show($request Request) 
+    public function show($id)
     {
         $item = Person::find($id);
         return view('jissyu7_1.show', ['item' => $item]);
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
-        $item = Person::find(___(13)___);
+        $item = Person::find($id);
         return view('jissyu7_1.edit', ['item' => $item]);
     }
 
- public function update(Request $request, ___(14)___)
+    public function update(Request $request, $id)
     {
         $this->validate($request, Person::$rules);
         $person = Person::find($id);
@@ -70,14 +77,14 @@ class Jissyu7_1Controller extends Controller
         return redirect('/jissyu7_1');
     }
 
-    public function del(___(15)___) 
+    public function del($id)
     {
         $item = Person::find($id);
         return view('jissyu7_1.del', ['item' => $item]);
     }
-    public function destroy($id) 
+    public function destroy($id)
     {
-        Person::find(___(16)___)->delete();
+        Person::find($id)->delete();
         return redirect('/jissyu7_1');
     }
 }

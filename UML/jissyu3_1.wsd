@@ -5,7 +5,7 @@ control  web.php as web
 control Jissyu3_1Controller as jissyu
 boundary input.blade.php as input
 boundary output.blade.php as output
-
+object a 
 user -> B : 該当ページをリクエスト[/Jissyu2]
 B -> web : GET[/Jissyu3]
 web -> jissyu : @index
